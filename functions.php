@@ -51,7 +51,7 @@ function mapo_enqueue_style_sheet() {
 /**
  * Register block styles.
  *
- * @since 0.9.2
+ * @since 1.0.0
  */
 function mapo_register_block_styles() {
 
@@ -83,3 +83,31 @@ function mapo_register_block_styles() {
 	}
 }
 add_action( 'init', 'mapo_register_block_styles' );
+
+add_action( 'init', function() {
+	$inline_style = '.is-style-heading-background, .editor-styles-wrapper .is-style-heading-background { display: inline-block; }';
+	register_block_style(
+		'core/heading',
+		array(
+			'name' => 'heading-background',
+			'label' => __( 'Heading with background', 'mapo' ),
+			'inline_style' => $inline_style,
+		)
+	);
+} );
+
+/**
+ * Register new block patterns categories.
+ *
+ * @since 1.0.0
+ */
+function mapo_register_block_pattern_categories() {
+	register_block_pattern_category(
+		'hero',
+		array( 'label' => __( 'Hero', 'mapo' ) )
+	);
+}
+add_action( 'init', 'mapo_register_block_pattern_categories' );
+
+// The following line re-enables the customizer
+add_action( 'customize_register', '__return_true' );
